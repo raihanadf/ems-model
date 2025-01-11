@@ -137,11 +137,11 @@ def test_load():
       scaler = pickle.load(f)
 
     # test example input
-    species = "Arabidopsis"
-    emsConcentration = 1.3
-    soakDuration = 600
-    lowestTemp = 24
-    highestTemp = 30
+    species = "Radish"
+    emsConcentration = 1.20
+    soakDuration = 17
+    lowestTemp = 22.1
+    highestTemp = 32.4
 
     # encode the species species
     species = le.transform([species])
@@ -164,7 +164,9 @@ def test_load():
 
     # make a prediction
     prediction_prob = model.predict_proba(data)
-    print(prediction_prob[0][0] * 100)
+
+    print(f"{prediction_prob[0][0] * 100}% chance of failure")
+    print(f"{prediction_prob[0][1] * 100}% chance of success")
 
 def main():
     print("Hello from ems-model!")
