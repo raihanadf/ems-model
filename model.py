@@ -133,7 +133,7 @@ def main():
     print("Hello from ems-model!")
 
     # load from csv file
-    df = load_data("ems_data.csv") 
+    df = load_data("csv/ems_data.csv") 
 
     # preprocess
     X, y = preprocess_data(df)
