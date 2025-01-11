@@ -126,7 +126,7 @@ def main():
     X, y = preprocess_data(df)
 
     # train
-    model, X_train, X_test, y_train, y_test = train_model(X, y)
+    model, _, X_test, _, y_test = train_model(X, y)
 
     # evaluate
     evaluate_model(model, X_test, y_test)
