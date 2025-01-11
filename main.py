@@ -55,21 +55,53 @@ def train_model(X, y):
     """
     # Split the data
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=42
+        X, y, test_size=0.2, random_state=64
     )
     
     # Initialize and train model
+    # use hitchhiker's guide to the galaxy which is 42
+    # if u just wanted to, say a random number
+    #
+    # Deep Thought had been built by its creators to give the answer to the "Ultimate Question of Life, the Universe, and Everything", which, after eons of calculations, was given simply as "42". 
+    #
     rf_model = RandomForestClassifier(
         n_estimators=100,
-        # max_depth=10,
+        max_depth=17,
         # min_samples_split=5,
         # min_samples_leaf=2,
-        random_state=42
+        criterion='gini',
+        random_state=64
     )
     
     rf_model.fit(X_train, y_train)
     
     return rf_model, X_train, X_test, y_train, y_test
+
+def evaluate_model(model, X_test, y_test):
+    """
+    Evaluate model performance
+    """
+    y_pred = model.predict(X_test)
+    y_test = np.array(y_test)
+
+    # Print classification report
+    print("\nClassification Report:")
+    print(classification_report(y_test, y_pred))
+
+    # Create confusion matrix
+    cm = confusion_matrix(y_test, y_pred)
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
+    plt.title('Confusion Matrix')
+    plt.ylabel('True Label')
+    plt.xlabel('Predicted Label')
+    # plt.show()
+
+    print(f"Model Accuracy Score: {round(model.score(X_test, y_test) * 100,1)}%")
+
+    print(pd.crosstab(y_test, y_pred, rownames=['Actual'], colnames=['Predicted']).rename_axis(index={'Actual': 'Actual'}, columns={'Predicted': 'Predicted'})
+    .set_axis(['Fail rate', 'Success rate'], axis=0)
+    .set_axis(['Fail rate', 'Success rate'], axis=1))
 
 def main():
     print("Hello from ems-model!")
@@ -83,13 +115,8 @@ def main():
     # train
     model, X_train, X_test, y_train, y_test = train_model(X, y)
 
-    y_pred = model.predict(X_test)
-    y_test = np.array(y_test)
-
-    # print classification report
-    # print(y_pred)
-    # print(y_test)
-    print(classification_report(y_test, y_pred))
+    # evaluate
+    evaluate_model(model, X_test, y_test)
 
 if __name__ == "__main__":
     main()
