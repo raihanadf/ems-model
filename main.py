@@ -25,56 +25,53 @@ def preprocess_data(df):
     - LabelEencoder to species (categorical)
     - MinMaxScaling for the rest (numerical)
     """
-    # Create label encoder for species
+    # create label encoder for species
     le = LabelEncoder()
     df['species_encoded'] = le.fit_transform(df['species'])
-    
-    # Create MinMax scaler for numerical features
+
+    # create minmax scaler for numerical features
     scaler = MinMaxScaler()
     numerical_columns = ['emsConcentration', 'soakDuration', 'lowestTemp', 'highestTemp']
-    
-    # Scale numerical features
+
+    # scale numerical features
     scaled_features = scaler.fit_transform(df[numerical_columns])
-    
-    # Create DataFrame with scaled features
+
+    # create dataframe with scaled features
     scaled_df = pd.DataFrame(scaled_features, columns=numerical_columns)
-    
-    # Add species_encoded to the scaled features
+
+    # add species_encoded to the scaled features
     scaled_df['species_encoded'] = df['species_encoded']
-    
-    # Prepare features and target
+
+    # prepare features and target
     X = scaled_df[['species_encoded', 'emsConcentration', 'soakDuration', 
                    'lowestTemp', 'highestTemp']]
     y = df['result']
-    
+
     return X, y
 
 def train_model(X, y):
     """
     Split data and train Random Forest model
     """
-    # Split the data
+    # split the data
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=64
     )
-    
-    # Initialize and train model
+
+    # initialize and train model
     # use hitchhiker's guide to the galaxy which is 42
     # if u just wanted to, say a random number
     #
-    # Deep Thought had been built by its creators to give the answer to the "Ultimate Question of Life, the Universe, and Everything", which, after eons of calculations, was given simply as "42". 
+    # "Deep Thought had been built by its creators to give the answer to the "Ultimate Question of Life, the Universe, and Everything", which, after eons of calculations, was given simply as "42"." - Wikipedia about hitchiker's guide to the galaxy
     #
     rf_model = RandomForestClassifier(
         n_estimators=100,
-        max_depth=17,
-        # min_samples_split=5,
-        # min_samples_leaf=2,
         criterion='gini',
         random_state=64
     )
-    
+
     rf_model.fit(X_train, y_train)
-    
+
     return rf_model, X_train, X_test, y_train, y_test
 
 def evaluate_model(model, X_test, y_test):
@@ -95,13 +92,29 @@ def evaluate_model(model, X_test, y_test):
     plt.title('Confusion Matrix')
     plt.ylabel('True Label')
     plt.xlabel('Predicted Label')
-    # plt.show()
 
-    print(f"Model Accuracy Score: {round(model.score(X_test, y_test) * 100,1)}%")
+    print(f"Model Accuracy Score: {round(model.score(X_test, y_test) * 100,1)}% \n")
 
-    print(pd.crosstab(y_test, y_pred, rownames=['Actual'], colnames=['Predicted']).rename_axis(index={'Actual': 'Actual'}, columns={'Predicted': 'Predicted'})
+    print(pd.crosstab(y_test, y_pred, rownames=['Actual'], colnames=['Predicted'])
+    .rename_axis(index={'Actual': 'Actual'}, columns={'Predicted': 'Predicted'})
     .set_axis(['Fail rate', 'Success rate'], axis=0)
     .set_axis(['Fail rate', 'Success rate'], axis=1))
+
+def feature_importance(model):
+    """
+    Plot feature importance
+    Check the importance of each feature
+    """
+    feature_names = ['Species', 'EMS Concentration', 'Soak Duration', 'Lowest Temperature', 'Highest Temperature']
+    feature_importance = pd.DataFrame({
+        'feature': feature_names,
+        'importance': model.feature_importances_
+    })
+    feature_importance = feature_importance.sort_values('importance', ascending=False)
+
+    plt.figure(figsize=(10, 6))
+    sns.barplot(x='importance', y='feature', data=feature_importance)
+    plt.title('Feature Importance')
 
 def main():
     print("Hello from ems-model!")
@@ -117,6 +130,11 @@ def main():
 
     # evaluate
     evaluate_model(model, X_test, y_test)
+
+    # feature importance
+    feature_importance(model)
+
+    plt.show()
 
 if __name__ == "__main__":
     main()
