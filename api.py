@@ -3,7 +3,6 @@ from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 from treatment import Treatment
 import pandas as pd
-import json
 import pickle
 
 app = FastAPI()
