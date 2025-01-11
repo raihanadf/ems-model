@@ -6,6 +6,8 @@ from sklearn.metrics import classification_report, confusion_matrix
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
+import pickle
+import os
 
 def load_data(file_path):
     """
@@ -25,16 +27,24 @@ def preprocess_data(df):
     - LabelEencoder to species (categorical)
     - MinMaxScaling for the rest (numerical)
     """
-    # create label encoder for species
+    # check if pickles directory exist
+    if not os.path.exists("pickles"):
+        os.makedirs("pickles")
+
+    # create label encoder for species and save it
     le = LabelEncoder()
     df['species_encoded'] = le.fit_transform(df['species'])
+
+    with open('pickles/label_encoding.pkl', 'wb') as f:
+      pickle.dump(le, f)
 
     # create minmax scaler for numerical features
     scaler = MinMaxScaler()
     numerical_columns = ['emsConcentration', 'soakDuration', 'lowestTemp', 'highestTemp']
-
-    # scale numerical features
     scaled_features = scaler.fit_transform(df[numerical_columns])
+
+    with open('pickles/scaler_encoding.pkl', 'wb') as f:
+      pickle.dump(scaler, f)
 
     # create dataframe with scaled features
     scaled_df = pd.DataFrame(scaled_features, columns=numerical_columns)
@@ -71,6 +81,9 @@ def train_model(X, y):
     )
 
     rf_model.fit(X_train, y_train)
+
+    with open('pickles/ems_model.pkl', 'wb') as f:
+      pickle.dump(rf_model, f)
 
     return rf_model, X_train, X_test, y_train, y_test
 
@@ -134,6 +147,7 @@ def main():
     # feature importance
     feature_importance(model)
 
+    # show evaluation on confusion matrix and feature importance
     plt.show()
 
 if __name__ == "__main__":
