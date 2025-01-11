@@ -33,27 +33,23 @@ def preprocess_data(df):
 
     # create label encoder for species and save it
     le = LabelEncoder()
-    df['species_encoded'] = le.fit_transform(df['species'])
+    df['species'] = le.fit_transform(df['species'])
 
     with open('pickles/label_encoding.pkl', 'wb') as f:
       pickle.dump(le, f)
 
     # create minmax scaler for numerical features
     scaler = MinMaxScaler()
-    numerical_columns = ['emsConcentration', 'soakDuration', 'lowestTemp', 'highestTemp']
-    scaled_features = scaler.fit_transform(df[numerical_columns])
+    numerical_columns = ['soakDuration', 'lowestTemp', 'highestTemp']
+    df[numerical_columns] = scaler.fit_transform(df[numerical_columns])
+
+    scaled_features = df[numerical_columns]
 
     with open('pickles/scaler_encoding.pkl', 'wb') as f:
       pickle.dump(scaler, f)
 
-    # create dataframe with scaled features
-    scaled_df = pd.DataFrame(scaled_features, columns=numerical_columns)
-
-    # add species_encoded to the scaled features
-    scaled_df['species_encoded'] = df['species_encoded']
-
     # prepare features and target
-    X = scaled_df[['species_encoded', 'emsConcentration', 'soakDuration', 
+    X = df[['species', 'emsConcentration', 'soakDuration', 
                    'lowestTemp', 'highestTemp']]
     y = df['result']
 
@@ -129,6 +125,47 @@ def feature_importance(model):
     sns.barplot(x='importance', y='feature', data=feature_importance)
     plt.title('Feature Importance')
 
+def test_load():
+    # load the model from pickles file
+    with open('pickles/ems_model.pkl', 'rb') as f:
+      model = pickle.load(f)
+
+    with open('pickles/label_encoding.pkl', 'rb') as f:
+      le = pickle.load(f)
+
+    with open('pickles/scaler_encoding.pkl', 'rb') as f:
+      scaler = pickle.load(f)
+
+    # test example input
+    species = "Arabidopsis"
+    emsConcentration = 1.3
+    soakDuration = 600
+    lowestTemp = 24
+    highestTemp = 30
+
+    # encode the species species
+    species = le.transform([species])
+
+    # normalize the input data
+    input_data = scaler.transform(pd.DataFrame({
+        # "emsConcentration": [emsConcentration],
+        "soakDuration": [soakDuration],
+        "lowestTemp": [lowestTemp],
+        "highestTemp": [highestTemp],
+    }))
+
+    data = pd.DataFrame({
+        "species" : [species],
+        "emsConcentration" : [emsConcentration],
+        "soakDuration": [input_data[0][0]],
+        "lowestTemp": [input_data[0][1]],
+        "highestTemp": [input_data[0][2]],
+    })
+
+    # make a prediction
+    prediction_prob = model.predict_proba(data)
+    print(prediction_prob[0][0] * 100)
+
 def main():
     print("Hello from ems-model!")
 
@@ -148,7 +185,9 @@ def main():
     feature_importance(model)
 
     # show evaluation on confusion matrix and feature importance
-    plt.show()
+    # plt.show()
+
+    test_load()
 
 if __name__ == "__main__":
     main()
