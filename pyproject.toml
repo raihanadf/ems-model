@@ -1,7 +1,7 @@
 [project]
 name = "ems-model"
 version = "0.1.0"
-description = "Add your description here"
+description = "model for ems-sense, detecting mutagenesis treatment using ems"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
