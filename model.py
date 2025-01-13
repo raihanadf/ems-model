@@ -137,9 +137,9 @@ def test_load():
       scaler = pickle.load(f)
 
     # test example input
-    species = "Radish"
+    species = "Rice"
     emsConcentration = 1.20
-    soakDuration = 17
+    soakDuration = 1700
     lowestTemp = 22.1
     highestTemp = 32.4
 
