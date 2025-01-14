@@ -24,7 +24,7 @@ def load_data(file_path):
 def preprocess_data(df):
     """
     Preprocess data: 
-    - LabelEencoder to species (categorical)
+    - LabelEncoder to species (categorical)
     - MinMaxScaling for the rest (numerical)
     """
     # check if pickles directory exist
