@@ -9,3 +9,5 @@ pickles/
 
 # Virtual environments
 .venv
+
+csv/

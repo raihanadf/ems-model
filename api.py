@@ -116,3 +116,17 @@ async def upload_csv(file: UploadFile = File(...)):
         return {"message": "File uploaded and overwritten successfully!"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/get-csv")
+def get_csv():
+    file_path = "csv/ems_data.csv"
+
+    try:
+        # Load the CSV file into a DataFrame
+        df = pd.read_csv(file_path)
+
+        # Convert the DataFrame to a list of dictionaries (JSON-like format)
+        data = df.to_dict(orient="records")
+        return data
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error processing CSV: {str(e)}")
