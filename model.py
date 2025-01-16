@@ -125,49 +125,6 @@ def feature_importance(model):
     sns.barplot(x='importance', y='feature', data=feature_importance)
     plt.title('Feature Importance')
 
-def test_load():
-    # load the model from pickles file
-    with open('pickles/ems_model.pkl', 'rb') as f:
-      model = pickle.load(f)
-
-    with open('pickles/label_encoding.pkl', 'rb') as f:
-      le = pickle.load(f)
-
-    with open('pickles/scaler_encoding.pkl', 'rb') as f:
-      scaler = pickle.load(f)
-
-    # test example input
-    species = "Rice"
-    emsConcentration = 1.20
-    soakDuration = 1700
-    lowestTemp = 22.1
-    highestTemp = 32.4
-
-    # encode the species species
-    species = le.transform([species])
-
-    # normalize the input data
-    input_data = scaler.transform(pd.DataFrame({
-        # "emsConcentration": [emsConcentration],
-        "soakDuration": [soakDuration],
-        "lowestTemp": [lowestTemp],
-        "highestTemp": [highestTemp],
-    }))
-
-    data = pd.DataFrame({
-        "species" : [species],
-        "emsConcentration" : [emsConcentration],
-        "soakDuration": [input_data[0][0]],
-        "lowestTemp": [input_data[0][1]],
-        "highestTemp": [input_data[0][2]],
-    })
-
-    # make a prediction
-    prediction_prob = model.predict_proba(data)
-
-    print(f"{prediction_prob[0][0] * 100}% chance of failure")
-    print(f"{prediction_prob[0][1] * 100}% chance of success")
-
 def main():
     print("Hello from ems-model!")
 
@@ -188,8 +145,6 @@ def main():
 
     # show evaluation on confusion matrix and feature importance
     # plt.show()
-
-    test_load()
 
 if __name__ == "__main__":
     main()
