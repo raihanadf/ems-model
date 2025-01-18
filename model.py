@@ -8,6 +8,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import pickle
 import os
+import subprocess
+np.random.seed(42)
 
 def load_data(file_path):
     """
@@ -61,7 +63,7 @@ def train_model(X, y):
     """
     # split the data
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=64
+        X, y, test_size=0.2, random_state=42
     )
 
     # initialize and train model
@@ -73,7 +75,7 @@ def train_model(X, y):
     rf_model = RandomForestClassifier(
         n_estimators=100,
         criterion='gini',
-        random_state=64
+        random_state=42
     )
 
     rf_model.fit(X_train, y_train)
@@ -128,7 +130,13 @@ def feature_importance(model):
 def main():
     print("Hello from ems-model!")
 
+    # randomize (shuffle) the data
+    # subprocess.run(
+    #         ["python", "shuffle.py"], capture_output=True, text=True, check=True
+    #     )
+
     # load from csv file
+    # df = load_data("csv/ems_data_randomized.csv") 
     df = load_data("csv/ems_data.csv") 
 
     # preprocess
