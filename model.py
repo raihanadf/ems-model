@@ -1,5 +1,5 @@
 import pandas as pd
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import KFold, cross_val_score, train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import LabelEncoder, MinMaxScaler
 from sklearn.metrics import classification_report, confusion_matrix
@@ -63,7 +63,7 @@ def train_model(X, y):
     """
     # split the data
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=42
+        X, y, test_size=0.1, random_state=42
     )
 
     # initialize and train model
@@ -85,15 +85,29 @@ def train_model(X, y):
 
     return rf_model, X_train, X_test, y_train, y_test
 
-def evaluate_model(model, X_test, y_test):
+def evaluate_model(model, X_test, y_test, X, y):
     """
     Evaluate model performance
     """
     y_pred = model.predict(X_test)
     y_test = np.array(y_test)
 
+    print("\n!!! Evaluation !!!\n")
+
+    print("\n!!! K - Fold !!!\n")
+    # Define the k-fold cross-validation (e.g., 5 folds)
+    kf = KFold(n_splits=10, shuffle=True, random_state=42)
+
+    # Evaluate the model using cross-validation
+    scores = cross_val_score(model, X, y, cv=kf, scoring='accuracy')
+
+    # Print the accuracy scores for each fold
+    print("Cross-validation scores:", scores)
+    print("Mean accuracy:", scores.mean())
+    print("Standard deviation:", scores.std())
+
     # Print classification report
-    print("\nClassification Report:")
+    print("\n!!! Classification Report !!!\n")
     print(classification_report(y_test, y_pred))
 
     # Create confusion matrix
@@ -105,6 +119,8 @@ def evaluate_model(model, X_test, y_test):
     plt.xlabel('Predicted Label')
 
     print(f"Model Accuracy Score: {round(model.score(X_test, y_test) * 100,1)}% \n")
+
+    print("\n!!! Confusion Matrix !!!\n")
 
     print(pd.crosstab(y_test, y_pred, rownames=['Actual'], colnames=['Predicted'])
     .rename_axis(index={'Actual': 'Actual'}, columns={'Predicted': 'Predicted'})
@@ -146,7 +162,7 @@ def main():
     model, _, X_test, _, y_test = train_model(X, y)
 
     # evaluate
-    evaluate_model(model, X_test, y_test)
+    evaluate_model(model, X_test, y_test, X, y)
 
     # feature importance
     feature_importance(model)
