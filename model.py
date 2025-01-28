@@ -132,6 +132,7 @@ def feature_importance(model):
     Plot feature importance
     Check the importance of each feature
     """
+    # Create and sort feature importance DataFrame
     feature_names = ['Species', 'EMS Concentration', 'Soak Duration', 'Lowest Temperature', 'Highest Temperature']
     feature_importance = pd.DataFrame({
         'feature': feature_names,
@@ -139,9 +140,32 @@ def feature_importance(model):
     })
     feature_importance = feature_importance.sort_values('importance', ascending=False)
 
-    plt.figure(figsize=(10, 6))
-    sns.barplot(x='importance', y='feature', data=feature_importance)
-    plt.title('Feature Importance')
+    # Create the plot
+    plt.figure(figsize=(12, 6))
+    ax = sns.barplot(
+        x='importance', 
+        y='feature', 
+        hue='feature',  # Add hue parameter
+        data=feature_importance, 
+        legend=False    # Hide the legend
+    )
+
+    # Add value labels on the bars
+    for i, v in enumerate(feature_importance['importance']):
+        # Format the value to show only 3 decimal places
+        percentage = f'{v:.3f}'
+        ax.text(v, i, f' {percentage}', va='center')
+
+    # Customize the plot
+    plt.title('Feature Importance', pad=20, fontsize=12, fontweight='bold')
+    plt.xlabel('Importance Score', fontsize=10)
+    plt.ylabel('Features', fontsize=10)
+
+    # Adjust layout to prevent text cutoff
+    plt.tight_layout()
+
+    # Show the plot
+    plt.show()
 
 def main():
     print("Hello from ems-model!")
@@ -168,7 +192,7 @@ def main():
     feature_importance(model)
 
     # show evaluation on confusion matrix and feature importance
-    # plt.show()
+    plt.show()
 
 if __name__ == "__main__":
     main()
