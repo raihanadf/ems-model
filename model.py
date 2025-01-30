@@ -29,18 +29,15 @@ def preprocess_data(df):
     - LabelEncoder to species (categorical)
     - MinMaxScaling for the rest (numerical)
     """
-    # check if pickles directory exist
     if not os.path.exists("pickles"):
         os.makedirs("pickles")
 
-    # create label encoder for species and save it
     le = LabelEncoder()
     df['species'] = le.fit_transform(df['species'])
 
     with open('pickles/label_encoding.pkl', 'wb') as f:
       pickle.dump(le, f)
 
-    # create minmax scaler for numerical features
     scaler = MinMaxScaler()
     numerical_columns = ['soakDuration', 'lowestTemp', 'highestTemp']
     df[numerical_columns] = scaler.fit_transform(df[numerical_columns])
@@ -50,7 +47,6 @@ def preprocess_data(df):
     with open('pickles/scaler_encoding.pkl', 'wb') as f:
       pickle.dump(scaler, f)
 
-    # prepare features and target
     X = df[['species', 'emsConcentration', 'soakDuration', 
                    'lowestTemp', 'highestTemp']]
     y = df['result']
@@ -61,7 +57,6 @@ def train_model(X, y):
     """
     Split data and train Random Forest model
     """
-    # split the data
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.1, random_state=42
     )
@@ -95,22 +90,17 @@ def evaluate_model(model, X_test, y_test, X, y):
     print("\n!!! Evaluation !!!\n")
 
     print("\n!!! K - Fold !!!\n")
-    # Define the k-fold cross-validation (e.g., 5 folds)
     kf = KFold(n_splits=10, shuffle=True, random_state=42)
 
-    # Evaluate the model using cross-validation
     scores = cross_val_score(model, X, y, cv=kf, scoring='accuracy')
 
-    # Print the accuracy scores for each fold
     print("Cross-validation scores:", scores)
     print("Mean accuracy:", scores.mean())
     print("Standard deviation:", scores.std())
 
-    # Print classification report
     print("\n!!! Classification Report !!!\n")
     print(classification_report(y_test, y_pred))
 
-    # Create confusion matrix
     cm = confusion_matrix(y_test, y_pred)
     plt.figure(figsize=(8, 6))
     sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
@@ -132,7 +122,6 @@ def feature_importance(model):
     Plot feature importance
     Check the importance of each feature
     """
-    # Create and sort feature importance DataFrame
     feature_names = ['Species', 'EMS Concentration', 'Soak Duration', 'Lowest Temperature', 'Highest Temperature']
     feature_importance = pd.DataFrame({
         'feature': feature_names,
@@ -140,28 +129,23 @@ def feature_importance(model):
     })
     feature_importance = feature_importance.sort_values('importance', ascending=False)
 
-    # Create the plot
     plt.figure(figsize=(12, 6))
     ax = sns.barplot(
         x='importance', 
         y='feature', 
-        hue='feature',  # Add hue parameter
+        hue='feature',  
         data=feature_importance, 
-        legend=False    # Hide the legend
+        legend=False    
     )
 
-    # Add value labels on the bars
     for i, v in enumerate(feature_importance['importance']):
-        # Format the value to show only 3 decimal places
         percentage = f'{v:.3f}'
         ax.text(v, i, f' {percentage}', va='center')
 
-    # Customize the plot
     plt.title('Feature Importance', pad=20, fontsize=12, fontweight='bold')
     plt.xlabel('Importance Score', fontsize=10)
     plt.ylabel('Features', fontsize=10)
 
-    # Adjust layout to prevent text cutoff
     plt.tight_layout()
 
 def main():

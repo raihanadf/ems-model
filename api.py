@@ -74,18 +74,15 @@ def get_species():
 @app.get("/retrain-model")
 def retrain_model():
     try:
-        # run the model.py script and capture output
         result = subprocess.run(
             ["python", "model.py"],
             check=True,
-            capture_output=True,  # captures stdout and stderr
-            text=True,  # decodes the output into strings
+            capture_output=True,
+            text=True,
         )
-        # extract and format the output
         output = result.stdout.strip()
         return {"message": "Retraining succeeded!", "details": output}
     except subprocess.CalledProcessError as e:
-        # handle the case where the script fails
         return {"message": "Retraining failed!", "error": str(e)}
 
 
@@ -99,16 +96,16 @@ async def upload_csv(file: UploadFile = File(...)):
         # save the uploaded file to csv/ems_data.csv (overwrite)
         file_path = "csv/ems_data.csv"
         with open(file_path, "wb") as f:
-            content = await file.read()  # read the uploaded file content
-            f.write(content)  # write the content to the destination file
+            content = await file.read() 
+            f.write(content)  
 
         # verify if the file is valid (optional: try loading it as a dataframe)
         try:
             pd.read_csv(
                 file_path
-            )  # this will raise an error if the file is not a valid csv
+            )  
         except Exception:
-            os.remove(file_path)  # remove invalid csv
+            os.remove(file_path)  
             raise HTTPException(
                 status_code=400, detail="Uploaded file is not a valid CSV."
             )
@@ -122,10 +119,8 @@ def get_csv():
     file_path = "csv/ems_data.csv"
 
     try:
-        # Load the CSV file into a DataFrame
         df = pd.read_csv(file_path)
 
-        # Convert the DataFrame to a list of dictionaries (JSON-like format)
         data = df.to_dict(orient="records")
         return data
     except Exception as e:
