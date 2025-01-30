@@ -164,9 +164,6 @@ def feature_importance(model):
     # Adjust layout to prevent text cutoff
     plt.tight_layout()
 
-    # Show the plot
-    plt.show()
-
 def main():
     print("Hello from ems-model!")
 
@@ -192,7 +189,7 @@ def main():
     feature_importance(model)
 
     # show evaluation on confusion matrix and feature importance
-    plt.show()
+    # plt.show()
 
 if __name__ == "__main__":
     main()
