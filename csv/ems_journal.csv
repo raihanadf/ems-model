@@ -1,0 +1,155 @@
+species,emsConcentration,soakDuration,lowestTemp,highestTemp,result
+Hemp - Kumamoto,0.25,180,25,30,0
+Hemp - Kumamoto,0.50,180,25,30,1
+Hemp - Kumamoto,0.75,180,25,30,1
+Hemp - Kumamoto,1.00,180,25,30,0
+Hemp - Kumamoto,0.25,360,25,30,0
+Hemp - Kumamoto,0.50,360,25,30,1
+Hemp - Kumamoto,0.75,360,25,30,0
+Hemp - Kumamoto,1.00,360,25,30,1
+Hemp - Seiki Selskin,0.25,180,25,30,1
+Hemp - Seiki Selskin,0.50,180,25,30,1
+Hemp - Seiki Selskin,0.75,180,25,30,1
+Hemp - Seiki Selskin,1.00,180,25,30,0
+Hemp - Seiki Selskin,0.25,360,25,30,0
+Hemp - Seiki Selskin,0.50,360,25,30,0
+Hemp - Seiki Selskin,0.75,360,25,30,1
+Hemp - Seiki Selskin,1.00,360,25,30,1
+Hemp - Lembang A,0.25,180,25,30,1
+Hemp - Lembang A,0.50,180,25,30,1
+Hemp - Lembang A,0.75,180,25,30,1
+Hemp - Lembang A,1.00,180,25,30,0
+Hemp - Lembang A,0.25,360,25,30,0
+Hemp - Lembang A,0.50,6,25,30,0
+Hemp - Lembang A,0.75,6,25,30,1
+Hemp - Lembang A,1.00,360,25,30,0
+Hemp - Bandung A,0.25,180,25,30,0
+Hemp - Bandung A,0.50,180,25,30,1
+Hemp - Bandung A,0.75,180,25,30,1
+Hemp - Bandung A,1.00,180,25,30,0
+Hemp - Bandung A,0.25,360,25,30,1
+Hemp - Bandung A,0.50,360,25,30,1
+Hemp - Bandung A,0.75,360,25,30,1
+Hemp - Bandung A,1.00,360,25,30,0
+Hemp - Indochina,0.25,180,25,30,0
+Hemp - Indochina,0.50,180,25,30,1
+Hemp - Indochina,0.75,180,25,30,1
+Hemp - Indochina,1.00,180,25,30,1
+Hemp - Indochina,0.25,360,25,30,0
+Hemp - Indochina,0.50,360,25,30,1
+Hemp - Indochina,0.75,360,25,30,1
+Hemp - Indochina,1.00,360,25,30,1
+Marigold - Tagetes erecta,0.0,240,25,30,0
+Marigold - Tagetes erecta,0.2,240,25,30,0
+Marigold - Tagetes erecta,0.4,240,25,30,1
+Marigold - Tagetes erecta,0.6,240,25,30,1
+Marigold - Tagetes erecta,0.8,240,25,30,1
+Marigold - Tagetes erecta,1.0,240,25,30,0
+Marigold - Tagetes erecta,0.082,360,25,30,0
+Marigold - Tagetes erecta,0.0082,1440,25,30,1
+Marigold - Tagetes erecta,0.00082,2880,25,30,1
+Marigold - Tagetes patula,0.0,240,25,30,0
+Marigold - Tagetes patula,0.2,240,25,30,0
+Marigold - Tagetes patula,0.4,240,25,30,0
+Marigold - Tagetes patula,0.6,240,25,30,0
+Marigold - Tagetes patula,0.8,240,25,30,0
+Marigold - Tagetes patula,1.0,240,25,30,0
+Marigold - Tagetes patula,1.5,240,25,30,0
+Marigold - Tagetes patula,2.0,240,25,30,1
+Marigold - Tagetes patula,2.5,240,25,30,0
+Marigold - Tagetes patula,3.0,240,25,30,0
+Marigold - Tagetes patula,0.187,360,25,30,1
+Marigold - Tagetes patula,0.0187,1440,25,30,0
+Marigold - Tagetes patula,0.00187,2880,25,30,1
+Fodder Barley - Hordeum vulgare,0.1,30,24,24,0
+Fodder Barley - Hordeum vulgare,0.1,60,24,24,1
+Fodder Barley - Hordeum vulgare,0.1,90,24,24,1
+Fodder Barley - Hordeum vulgare,0.1,120,24,24,1
+Fodder Barley - Hordeum vulgare,0.1,150,24,24,0
+Fodder Barley - Hordeum vulgare,0.3,30,24,24,0
+Fodder Barley - Hordeum vulgare,0.3,60,24,24,1
+Fodder Barley - Hordeum vulgare,0.3,90,24,24,1
+Fodder Barley - Hordeum vulgare,0.3,120,24,24,0
+Fodder Barley - Hordeum vulgare,0.3,150,24,24,0
+Fodder Barley - Hordeum vulgare,0.5,30,24,24,0
+Fodder Barley - Hordeum vulgare,0.5,60,24,24,0
+Fodder Barley - Hordeum vulgare,0.5,90,24,24,0
+Fodder Barley - Hordeum vulgare,0.5,120,24,24,0
+Fodder Barley - Hordeum vulgare,0.5,150,24,24,0
+Fodder Barley - Hordeum vulgare,0.7,30,24,24,0
+Fodder Barley - Hordeum vulgare,0.7,60,24,24,0
+Fodder Barley - Hordeum vulgare,0.7,90,24,24,0
+Fodder Barley - Hordeum vulgare,0.7,120,24,24,0
+Fodder Barley - Hordeum vulgare,0.7,150,24,24,0
+Fodder Barley - Hordeum vulgare,0.9,30,24,24,0
+Fodder Barley - Hordeum vulgare,0.9,60,24,24,0
+Fodder Barley - Hordeum vulgare,0.9,90,24,24,0
+Fodder Barley - Hordeum vulgare,0.9,120,24,24,0
+Fodder Barley - Hordeum vulgare,0.9,150,24,24,0
+Watermelon - G42,0.1,40,25,30,1
+Watermelon - G42,0.1,60,25,30,1
+Watermelon - G42,0.1,80,25,30,0
+Watermelon - G42,0.15,40,25,30,1
+Watermelon - G42,0.15,60,25,30,1
+Watermelon - G42,0.15,80,25,30,0
+Watermelon - G42,0.2,40,25,30,0
+Watermelon - G42,0.2,60,25,30,0
+Watermelon - G42,0.2,80,25,30,0
+Cotton - TM-1,0.5,180,20,32,0
+Cotton - TM-1,1.5,180,20,32,1
+Cotton - TM-1,2.5,180,20,32,0
+Cotton - TM-1,3.5,180,20,32,0
+Cotton - TM-1,0.5,360,20,32,0
+Cotton - TM-1,1.5,360,20,32,1
+Cotton - TM-1,2.5,360,20,32,0
+Cotton - TM-1,3.5,360,20,32,0
+Cotton - Luyanmian21,0.5,180,20,32,0
+Cotton - Luyanmian21,1.5,180,20,32,1
+Cotton - Luyanmian21,2.5,180,20,32,0
+Cotton - Luyanmian21,3.5,180,20,32,0
+Cotton - Luyanmian21,0.5,360,20,32,0
+Cotton - Luyanmian21,1.5,360,20,32,1
+Cotton - Luyanmian21,2.5,360,20,32,0
+Cotton - Luyanmian21,3.5,360,20,32,0
+Sesame - Tilottama,0.25,120,23,25,0
+Sesame - Tilottama,0.25,240,23,25,0
+Sesame - Tilottama,0.25,360,23,25,0
+Sesame - Tilottama,0.50,120,23,25,0
+Sesame - Tilottama,0.50,240,23,25,0
+Sesame - Tilottama,0.50,360,23,25,1
+Sesame - Tilottama,1.00,120,23,25,0
+Sesame - Tilottama,1.00,240,23,25,1
+Sesame - Tilottama,1.00,360,23,25,1
+Chinese cabbage - Brassica rapa ssp. pekinensis,0.5,720,4,25,1
+Chinese cabbage - Brassica rapa ssp. pekinensis,0.3,480,4,20,0
+Chinese cabbage - Brassica rapa ssp. pekinensis,0.7,1440,5,25,1
+Chinese cabbage - Brassica rapa ssp. pekinensis,0.1,360,3,18,0
+Chinese cabbage - Brassica rapa ssp. pekinensis,1.0,2880,4,28,1
+Jasmine - Jasminum grandiflorum,0.25,60,28,30,1
+Jasmine - Jasminum grandiflorum,0.30,60,28,30,1
+Jasmine - Jasminum grandiflorum,0.35,60,28,30,0
+Jasmine - Jasminum grandiflorum,0.40,60,28,30,0
+Maize - Zea mays (B73),1.0,120,25,30,1
+Maize - Zea mays (B73),0.5,240,25,30,0
+Maize - Zea mays (B73),0.7,480,25,30,1
+Maize - Zea mays (B73),1.2,720,25,30,0
+Sunflower - Helianthus annuus (BBS-1),0.5,480,22,25,1
+Sunflower - Helianthus annuus (BBS-1),0.6,480,22,25,1
+Sunflower - Helianthus annuus (BBS-1),0.75,480,22,25,0
+Sunflower - Helianthus annuus (BBS-1),1.0,480,22,25,0
+Sunflower - Helianthus annuus (BBS-1),2.0,480,22,25,0
+Sunflower - Helianthus annuus (BBS-1),3.0,480,22,25,0
+Fenugreek - Trigonella foenum-graecum,0.1,360,25,30,1
+Fenugreek - Trigonella foenum-graecum,0.2,360,25,30,1
+Fenugreek - Trigonella foenum-graecum,0.3,360,25,30,0
+Fenugreek - Trigonella foenum-graecum,0.4,360,25,30,0
+Hyoscyamus niger - Black Henbane,0.01,60,25,28,1
+Hyoscyamus niger - Black Henbane,0.02,60,25,28,1
+Hyoscyamus niger - Black Henbane,0.03,60,25,28,1
+Hyoscyamus niger - Black Henbane,0.04,60,25,28,0
+Hyoscyamus niger - Black Henbane,0.05,60,25,28,0
+Hyoscyamus niger - Black Henbane,0.06,60,25,28,0
+Hyoscyamus niger - Black Henbane,0.07,60,25,28,0
+Hyoscyamus niger - Black Henbane,0.08,60,25,28,0
+Hyoscyamus niger - Black Henbane,0.09,60,25,28,0
+Hyoscyamus niger - Black Henbane,0.1,60,25,28,0
