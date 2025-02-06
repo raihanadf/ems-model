@@ -1,5 +1,5 @@
 import pandas as pd
-from sklearn.model_selection import StratifiedShuffleSplit,KFold, cross_val_score, cross_val_predict, train_test_split
+from sklearn.model_selection import StratifiedShuffleSplit, cross_val_score, train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import LabelEncoder, MinMaxScaler
 from sklearn.metrics import classification_report, confusion_matrix
