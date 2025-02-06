@@ -1,5 +1,5 @@
 import pandas as pd
-from sklearn.model_selection import KFold, cross_val_score, train_test_split
+from sklearn.model_selection import StratifiedShuffleSplit,KFold, cross_val_score, cross_val_predict, train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import LabelEncoder, MinMaxScaler
 from sklearn.metrics import classification_report, confusion_matrix
@@ -58,7 +58,7 @@ def train_model(X, y):
     Split data and train Random Forest model
     """
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.1, random_state=42
+        X, y, test_size=0.3, random_state=42
     )
 
     # initialize and train model
@@ -89,10 +89,9 @@ def evaluate_model(model, X_test, y_test, X, y):
 
     print("\n!!! Evaluation !!!\n")
 
-    print("\n!!! K - Fold !!!\n")
-    kf = KFold(n_splits=10, shuffle=True, random_state=42)
-
-    scores = cross_val_score(model, X, y, cv=kf, scoring='accuracy')
+    print("\n!!! K - Fold (Stratified Shuffle Split) !!!\n")
+    sss = StratifiedShuffleSplit(n_splits=10, test_size=0.3, random_state=42)
+    scores = cross_val_score(model, X, y, cv=sss)
 
     print("Cross-validation scores:", scores)
     print("Mean accuracy:", scores.mean())
